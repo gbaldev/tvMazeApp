@@ -1,4 +1,4 @@
-import Country from "../Country"
+import Country from "models/Country"
 
 interface Network {
   id: number

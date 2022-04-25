@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { FlatList, ScrollView } from 'react-native-gesture-handler'
-import { People } from '../../../models'
-import { useGeneralTvMazeActions } from '../../../redux/generalTvMaze'
-import { NoResults, Separator, TVMazeModal } from '../../../utils/components'
-import { SCREEN_HEIGHT, TEXT_COLOR } from '../../../utils/constants'
-import { loadingImage } from '../../../utils/utils'
+import { FlatList } from 'react-native-gesture-handler'
+import { People } from 'models/index'
+import { useGeneralTvMazeActions } from 'redux/generalTvMaze'
+import { NoResults, Separator, TVMazeModal } from 'utils/components'
+import { SCREEN_HEIGHT, TEXT_COLOR } from 'utils/constants'
+import { loadingImage } from 'utils/utils'
 import SeriePreviewCard from '../SeriePreviewCard'
 
 interface PeoplePreviewCardProps {

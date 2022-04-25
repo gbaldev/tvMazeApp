@@ -2,11 +2,11 @@ import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
-import { Episode, Serie } from '../../../../models'
-import { useGeneralTvMazeActions } from '../../../../redux/generalTvMaze'
-import { NoResults, Separator } from '../../../../utils/components'
-import { TEXT_COLOR } from '../../../../utils/constants'
-import { loadingImage, removeHtmlTags } from '../../../../utils/utils'
+import { Episode, Serie } from 'models/index'
+import { useGeneralTvMazeActions } from 'redux/generalTvMaze'
+import { NoResults, Separator } from 'utils/components'
+import { TEXT_COLOR } from 'utils/constants'
+import { loadingImage, removeHtmlTags } from 'utils/utils'
 
 interface SeasonsDetailsProps {
     show: Serie

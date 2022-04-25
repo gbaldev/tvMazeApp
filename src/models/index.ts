@@ -6,15 +6,16 @@ import Network from './Network'
 import Rating from './Rating'
 import Schedule from './Schedule'
 import Serie from './Serie'
-import Episode from './Episode'
+import Episode, { EpisodeBySerieIdResponse } from './Episode'
 import WebChannel from './WebChannel'
 import Season from './Season'
 import People, { PeopleWithCast } from './People'
 import Country from './Country'
-import { SearchedSerie, SearchByShowResponse } from './SearchedSerie'
+import { SearchedSerie, SearchByShowResponse, SearchByNameResponse, SearchedPerson } from './SearchedSerie'
 import { CHANNEL } from './Channel'
 import { CRITERIA } from './Criteria'
 import Cast from './Cast'
+import HttpRequests from './HttpRequests'
 
-export type { HttpRequest, Episode, Country, People, Season, Externals, Image, Links, Network, Rating, Schedule, Serie, WebChannel, SearchedSerie, SearchByShowResponse, Cast, PeopleWithCast }
+export type { HttpRequest, Episode, HttpRequests, SearchedPerson, SearchByNameResponse, EpisodeBySerieIdResponse, Country, People, Season, Externals, Image, Links, Network, Rating, Schedule, Serie, WebChannel, SearchedSerie, SearchByShowResponse, Cast, PeopleWithCast }
 export { CHANNEL, CRITERIA }

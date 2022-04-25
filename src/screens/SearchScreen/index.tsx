@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { FlatList, StyleSheet } from 'react-native'
-import { People } from '../../models'
-import { useGeneralTvMazeActions } from '../../redux/generalTvMaze'
-import { seriesProvider, useAppSelector } from '../../redux/hooks'
-import { NoResults, Screen, TvMazeLoader } from '../../utils/components'
+import { useGeneralTvMazeActions } from 'redux/generalTvMaze'
+import { seriesProvider, useAppSelector } from 'redux/hooks'
+import { NoResults, Screen, TvMazeLoader } from 'utils/components'
 import { PeoplePreviewCard, SeriePreviewCard } from '../components'
 
 const SearchScreen = ({ route }: any) => {

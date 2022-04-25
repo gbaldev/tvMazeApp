@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { ActivityIndicator, Image, StyleSheet, View, FlatList, TouchableOpacity, Text } from 'react-native'
-import { useGeneralTvMazeActions } from '../../redux/generalTvMaze'
-import { seriesProvider, useAppSelector } from '../../redux/hooks'
-import { NoResults, Screen } from '../../utils/components'
-import { loadingImage } from '../../utils/utils'
-import { PeoplePreviewCard, SeriePreviewCard } from '../components'
+import React, { useState } from 'react'
+import { ActivityIndicator, Image, StyleSheet, View, FlatList, TouchableOpacity } from 'react-native'
+import { useGeneralTvMazeActions } from 'redux/generalTvMaze'
+import { seriesProvider, useAppSelector } from 'redux/hooks'
+import { NoResults, Screen } from 'utils/components'
+import { PeoplePreviewCard, SeriePreviewCard } from 'screens/components'
 import { SearchModal } from './components'
 
 const ExploreScreen = ({ route }: any) => {

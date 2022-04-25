@@ -1,6 +1,6 @@
 import React from 'react'
 import { SafeAreaView, StyleSheet, View, ViewStyle } from 'react-native'
-import { AppHeader } from '../../../navigation/components'
+import { AppHeader } from 'navigation/components'
 
 interface ScreenProps {
   children: React.ReactNode[] | React.ReactNode

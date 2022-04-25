@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Animated, Image, StyleSheet, View } from 'react-native'
-import { useAppSelector } from '../../../redux/hooks'
-import { SCREEN_HEIGHT } from '../../constants'
+import { useAppSelector } from 'redux/hooks'
+import { SCREEN_HEIGHT } from 'utils/constants'
 
 const TvMazeLoader = () => {
   const loading = useAppSelector(state => state.generalTvMaze.loading)

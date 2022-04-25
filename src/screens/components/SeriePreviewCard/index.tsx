@@ -1,12 +1,12 @@
 import { useNavigation } from '@react-navigation/native'
 import React, { useEffect, useState } from 'react'
 import { Image, StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native'
-import { Serie } from '../../../models'
-import { useGeneralTvMazeActions } from '../../../redux/generalTvMaze'
-import { seriesProvider, useAppSelector } from '../../../redux/hooks'
-import { Separator } from '../../../utils/components'
-import { TEXT_COLOR } from '../../../utils/constants'
-import { loadingImage } from '../../../utils/utils'
+import { Serie } from 'models/index'
+import { useGeneralTvMazeActions } from 'redux/generalTvMaze'
+import { seriesProvider, useAppSelector } from 'redux/hooks'
+import { Separator } from 'utils/components'
+import { TEXT_COLOR } from 'utils/constants'
+import { loadingImage } from 'utils/utils'
 
 interface SeriePreviewCardProps {
   show?: Serie

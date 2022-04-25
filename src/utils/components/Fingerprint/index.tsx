@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import TouchID from 'react-native-touch-id';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { TEXT_COLOR } from '../../constants';
+import { TEXT_COLOR } from 'utils/constants';
 import TVMazeModal from '../TVMazeModal';
 import Separator from '../Separator';
 

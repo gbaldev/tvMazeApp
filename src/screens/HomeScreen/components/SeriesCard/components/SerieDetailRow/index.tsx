@@ -1,7 +1,7 @@
-import React from "react"
-import { FlexStyle, StyleSheet, View } from "react-native"
-import { SerieDetail } from "../"
-import { Serie } from "../../../../../../models"
+import React from 'react'
+import { FlexStyle, StyleSheet, View } from 'react-native'
+import { SerieDetail } from '../'
+import { Serie } from 'models/index'
 
 interface SerieDetailRowProps {
     series: Serie[]

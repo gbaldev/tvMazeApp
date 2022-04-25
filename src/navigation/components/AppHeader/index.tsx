@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { Separator } from '../../../utils/components'
+import { Separator } from 'utils/components'
 
 interface AppHeaderProps {
   title?: string

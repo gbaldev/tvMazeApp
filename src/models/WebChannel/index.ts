@@ -1,4 +1,4 @@
-import { CHANNEL } from "../../screens/HomeScreen/components/SeriesCard"
+import { CHANNEL } from "models/Channel"
 
 interface WebChannel {
     id: number

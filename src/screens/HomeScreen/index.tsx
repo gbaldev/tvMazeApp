@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { StyleSheet } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import { CRITERIA } from '../../models'
-import { useGeneralTvMazeActions } from '../../redux/generalTvMaze'
-import { seriesProvider, useAppSelector } from '../../redux/hooks'
-import { Screen, TvMazeLoader } from '../../utils/components'
+import { CRITERIA } from 'models/index'
+import { useGeneralTvMazeActions } from 'redux/generalTvMaze'
+import { seriesProvider, useAppSelector } from 'redux/hooks'
+import { Screen, TvMazeLoader } from 'utils/components'
 import { SeriesCard } from './components'
 
 const HomeScreen = () => {

@@ -1,4 +1,4 @@
-import { Image, Links, Network, WebChannel } from '../'
+import { Image, Links, Network, WebChannel } from 'models/index'
 
 interface Season {
   id: number

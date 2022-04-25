@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import generalTvMaze from '../redux/generalTvMaze'
+import generalTvMaze from 'redux/generalTvMaze'
 import { persistReducer } from 'redux-persist'
 import thunk from 'redux-thunk'
 import AsyncStorage from '@react-native-async-storage/async-storage';

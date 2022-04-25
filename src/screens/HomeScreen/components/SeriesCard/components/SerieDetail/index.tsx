@@ -1,9 +1,9 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { Serie } from '../../../../../../models'
-import { TEXT_COLOR } from '../../../../../../utils/constants'
-import { listElements, loadingImage } from '../../../../../../utils/utils'
+import { Serie } from 'models/index'
+import { TEXT_COLOR } from 'utils/constants'
+import { listElements, loadingImage } from 'utils/utils'
 
 interface SerieDetailProps {
     serie: Serie

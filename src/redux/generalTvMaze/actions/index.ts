@@ -1,8 +1,7 @@
-import { createAsyncThunk } from "@reduxjs/toolkit"
-import { SearchedSerie } from "../../../models"
-import Episode, { EpisodeBySerieIdResponse } from "../../../models/Episode"
-import { SearchedPerson } from "../../../models/SearchedSerie"
-import TvMazeService from '../../../services/TvMazeService'
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import { SearchedSerie, SearchedPerson } from 'models/index'
+import Episode, { EpisodeBySerieIdResponse } from 'models/Episode'
+import TvMazeService from 'services/TvMazeService'
 
 interface SeriesListProps {
   page?: number

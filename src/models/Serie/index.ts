@@ -1,5 +1,4 @@
-import { Externals, Image, Links, Network, Rating, Schedule, Season, WebChannel } from "../"
-import Episode from "../Episode"
+import { Externals, Image, Links, Network, Rating, Schedule, WebChannel, Episode } from "models/index"
 
 interface Serie {
   id: number

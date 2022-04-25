@@ -1,9 +1,9 @@
 import { useRef } from 'react'
 import { createSlice, bindActionCreators } from '@reduxjs/toolkit'
-import { Episode, People, Serie } from '../../models'
+import { Episode, People, Serie } from 'models/index'
 import { fetchEpisodes, fetchSerieByName, fetchSeriesList, fetchPeople, fetchPersonsByName, fetchCast, fetchSerieById } from './actions'
 import { fetchEpisodesReducer, fetchSerieByNameReducer, fetchSeriesListReducer, fetchPeopleReducer, fetchPersonsByNameReducer, fetchCastReducer, fetchSerieByIdReducer  } from './reducers'
-import { useAppDispatch } from '../hooks'
+import { useAppDispatch } from 'redux/hooks'
 
 
 export interface GeneralTvMazeState {

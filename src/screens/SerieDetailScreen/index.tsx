@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react'
 import { ActivityIndicator, Image, ImageBackground, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import { useGeneralTvMazeActions } from '../../redux/generalTvMaze'
-import { seriesProvider, useAppSelector } from '../../redux/hooks'
-import { Screen, Separator } from '../../utils/components'
-import { bold, listElements, loadingImage, removeHtmlTags } from '../../utils/utils'
-import { DetailCard } from './components'
-import SeasonsDetails from './components/SeasonsDetails'
+import { useGeneralTvMazeActions } from 'redux/generalTvMaze'
+import { seriesProvider, useAppSelector } from 'redux/hooks'
+import { Screen, Separator } from 'utils/components'
+import { bold, listElements, loadingImage, removeHtmlTags } from 'utils/utils'
+import { DetailCard, SeasonsDetails } from './components'
 
 const SerieDetailScreen = ({ route }: any) => {
   let episode = useAppSelector(state => state.generalTvMaze.selectedEpisode)

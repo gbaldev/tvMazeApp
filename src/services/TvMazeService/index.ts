@@ -1,4 +1,4 @@
-import { Episode, People, PeopleWithCast, Season, Serie } from '../../models'
+import { Episode, People, PeopleWithCast, Season, Serie } from 'models/index'
 import TvMazeApiInstance from '../TvMazeApiInstance'
 import TvMazeProvider from './provider'
 

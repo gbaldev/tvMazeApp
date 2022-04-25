@@ -1,8 +1,8 @@
 import { useNavigation } from '@react-navigation/native'
 import React, { useEffect, useRef, useState } from 'react'
 import { Animated, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { Separator, TVMazeModal } from '../../../../utils/components'
-import { TEXT_COLOR } from '../../../../utils/constants'
+import { Separator, TVMazeModal } from 'utils/components'
+import { TEXT_COLOR } from 'utils/constants'
 
 interface SearchModalProps {
   showSearchModal: boolean,

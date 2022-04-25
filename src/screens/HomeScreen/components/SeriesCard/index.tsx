@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { CHANNEL, CRITERIA } from '../../../../models'
-import { seriesProvider } from '../../../../redux/hooks'
+import { CHANNEL, CRITERIA } from 'models/index'
+import { seriesProvider } from 'redux/hooks'
 import { Header, SerieDetailRow } from './components'
 
 interface SeriesCardProps {

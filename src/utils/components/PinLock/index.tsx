@@ -1,10 +1,9 @@
-import AsyncStorage from "@react-native-async-storage/async-storage"
-import React, { useEffect, useRef, useState } from "react"
-import { Animated, BackHandler, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
-import TouchID from "react-native-touch-id"
-import { TEXT_COLOR } from "../../constants"
-import Separator from "../Separator"
-import TVMazeModal from "../TVMazeModal"
+import React, { useEffect, useRef, useState } from 'react'
+import { Animated, BackHandler, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import TouchID from 'react-native-touch-id'
+import { TEXT_COLOR } from 'utils/constants'
+import { Separator, TVMazeModal } from 'utils/components'
 
 const PinLock = () => {
   const [pinLock, setPinkLock] = useState<boolean>(false)

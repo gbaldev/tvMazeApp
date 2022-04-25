@@ -1,9 +1,7 @@
-import { PayloadAction } from "@reduxjs/toolkit"
-import { GeneralTvMazeState } from "../"
-import { People, PeopleWithCast, SearchByShowResponse, Serie } from "../../../models"
-import { EpisodeBySerieIdResponse } from "../../../models/Episode"
-import { SearchByNameResponse } from "../../../models/SearchedSerie"
-import { removeHtmlTags } from "../../../utils/utils"
+import { PayloadAction } from '@reduxjs/toolkit'
+import { GeneralTvMazeState } from 'redux/generalTvMaze'
+import { People, PeopleWithCast, SearchByShowResponse, Serie, EpisodeBySerieIdResponse, SearchByNameResponse } from 'models/index'
+import { removeHtmlTags } from 'utils/utils'
 
 const fetchSeriesListReducer = {
   pending: (state: GeneralTvMazeState) => {
