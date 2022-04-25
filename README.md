@@ -16,7 +16,7 @@
 There is already a build at /dist, you can also buiild the app yourself:
 
 - cd into root
-- react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
-- cd android && ./gradlew assembleDebug
+- run `npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res`
+- run `cd android && ./gradlew assembleDebug`
 
-the you can find the generated APK in android/app/build/outputs/apk/debug/app-debug.apk
+the you can find the generated APK in `android/app/build/outputs/apk/debug/app-debug.apk`
