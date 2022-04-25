@@ -2,7 +2,6 @@ import React from 'react'
 import { View, Platform, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Separator } from '../../../utils/components'
-import { loadingImage } from '../../../utils/utils'
 const isAndroid = Platform.OS === 'android'
 
 interface AppHeaderProps {

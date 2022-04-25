@@ -21,6 +21,8 @@ target 'tvMazeApp' do
 
   pod 'TouchID', :path => '../node_modules/react-native-touch-id'
 
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
   target 'tvMazeAppTests' do
     inherit! :complete
     # Pods for testing
