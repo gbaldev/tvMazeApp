@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
+import { FlatList, ScrollView } from 'react-native-gesture-handler'
 import { People } from '../../../models'
 import { useGeneralTvMazeActions } from '../../../redux/generalTvMaze'
 import { NoResults, Separator, TVMazeModal } from '../../../utils/components'
@@ -23,35 +23,25 @@ const PeoplePreviewCard = ({ person }: PeoplePreviewCardProps) => {
     }
     toggleModal()
   }
-  
-  const Info = () => {
-    if (person.castIds?.length) {
-      return (
-        <>
-          {person.castIds.map((id, i) => 
-            <View style={styles.cardContainer} key={`${person.id}-${i}`}>
-              <SeriePreviewCard id={id} callback={toggleModal} />
-            </View>
-          )}
-        </>
-      )
-    } else {
-      return <NoResults text='No series information available' />
-    }
-  }
-  
+  const renderItem = ({item}: any) => (
+    <View style={styles.cardContainer}>
+      <SeriePreviewCard id={item} callback={toggleModal} />
+    </View>
+  )
+
   return (
     <TouchableOpacity style={styles.container} onPress={handleOnPress}>
       <TVMazeModal visible={showDetailModal} onBackdropTouchEnd={toggleModal}>
-        <ScrollView style={styles.detailContainer}>
-          <Text style={styles.title}>{person?.name}</Text>
-          <Separator backgroundColor='gray' paddingVertical={10}/>
-          <Image source={{uri: person?.image?.original}} defaultSource={loadingImage} style={styles.modalImageStyle}/>
-          <Separator backgroundColor='gray' paddingVertical={10}/>
-          {person?.loadingCast && <ActivityIndicator style={styles.activity} />}
-          {person?.castIds && <Info/>}
-        </ScrollView>
-        
+        <>
+        <Text style={styles.title}>{person?.name}</Text>
+          <View style={styles.detailContainer}>
+            <Separator backgroundColor='gray' paddingVertical={10}/>
+            <Image source={{uri: person?.image?.original}} defaultSource={loadingImage} style={styles.modalImageStyle}/>
+            <Separator backgroundColor='gray' paddingVertical={10}/>
+            {person?.loadingCast && <ActivityIndicator style={styles.activity} />}
+            {person?.castIds && <FlatList data={person.castIds} renderItem={renderItem} ListEmptyComponent={<NoResults text='No series information available' />} />}
+          </View>
+        </>
       </TVMazeModal> 
       <View style={styles.leftContainer}>
         <Image source={{uri: person?.image?.medium}} defaultSource={loadingImage} style={styles.image} />
@@ -98,6 +88,7 @@ const styles = StyleSheet.create({
     color: TEXT_COLOR,
   },
   title: {
+    paddingTop: 10,
     flex: 1,
     fontSize: 16,
     fontWeight: 'bold',
@@ -113,6 +104,7 @@ const styles = StyleSheet.create({
   },
   detailContainer: {
     padding: 10,
+    paddingTop: 0,
     width: '100%',
     maxHeight: SCREEN_HEIGHT*0.7
   },
