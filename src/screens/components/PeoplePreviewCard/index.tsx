@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { People } from '../../../models'
@@ -47,9 +47,8 @@ const PeoplePreviewCard = ({ person }: PeoplePreviewCardProps) => {
           <Text style={styles.title}>{person?.name}</Text>
           <Separator backgroundColor='gray' paddingVertical={10}/>
           <Image source={{uri: person?.image?.original}} defaultSource={loadingImage} style={styles.modalImageStyle}/>
-          <Separator height={15} />
           <Separator backgroundColor='gray' paddingVertical={10}/>
-          {person?.loadingCast && <ActivityIndicator />}
+          {person?.loadingCast && <ActivityIndicator style={styles.activiy} />}
           {person?.castIds && <Info/>}
         </ScrollView>
         
@@ -121,9 +120,10 @@ const styles = StyleSheet.create({
     height: 100,
     flexShrink: 1,
     marginBottom: 20,
-    overflow: 'scroll',
-    borderBottomLeftRadius: 10,
-    borderTopLeftRadius: 10,
+    overflow: 'visible',
+  },
+  activity: {
+    height: 130,
   }
 })
 

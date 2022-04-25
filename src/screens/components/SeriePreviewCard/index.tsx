@@ -58,7 +58,7 @@ const SeriePreviewCard = ({ show, id, callback }: SeriePreviewCardProps) => {
           <View style={styles.rightContainer}>
             <Text style={styles.title}>{_show?.name}</Text>
             <Separator height={10} />
-            <Text numberOfLines={id ? 3 : 40} style={styles.summary}>{_show?.summary}</Text>
+            <Text numberOfLines={id ? 2 : 40} style={styles.summary}>{_show?.summary}</Text>
           </View>
         </>
       )}
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   },
   activityContainer: {
     flex: 1,
+    height: 100,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

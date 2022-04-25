@@ -2,7 +2,6 @@ import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { TEXT_COLOR } from '../../constants'
-import { loadingImage } from '../../utils'
 
 interface NoResultsProps {
   text: string
