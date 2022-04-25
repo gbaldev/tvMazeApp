@@ -48,7 +48,7 @@ const PeoplePreviewCard = ({ person }: PeoplePreviewCardProps) => {
           <Separator backgroundColor='gray' paddingVertical={10}/>
           <Image source={{uri: person?.image?.original}} defaultSource={loadingImage} style={styles.modalImageStyle}/>
           <Separator backgroundColor='gray' paddingVertical={10}/>
-          {person?.loadingCast && <ActivityIndicator style={styles.activiy} />}
+          {person?.loadingCast && <ActivityIndicator style={styles.activity} />}
           {person?.castIds && <Info/>}
         </ScrollView>
         
