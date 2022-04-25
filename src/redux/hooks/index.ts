@@ -34,9 +34,4 @@ export const seriesProvider = {
     }
     return fromListPeople
   },
-  // getPeopleByName: (name: string) => {
-  //     const people = useAppSelector(state => state.generalTvMaze.people)
-  //     return people.filter(person => person.name.toLowerCase().match(name.toLowerCase()))
-  // }
-
 }
