@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import React, { useEffect, useRef, useState } from "react"
-import { Animated, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
+import { Animated, BackHandler, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
+import TouchID from "react-native-touch-id"
 import { TEXT_COLOR } from "../../constants"
 import Separator from "../Separator"
 import TVMazeModal from "../TVMazeModal"
@@ -10,6 +11,7 @@ const PinLock = () => {
   const [pin, setPin] = useState<string>('')
   const [confirmationPin, setConfirmationPin] = useState<string>('')
   const [enabled, setEnabled] = useState(false)
+  const [error, setError] = useState(false)
   const userPin = useRef<string>('')
   const colorState = useRef(new Animated.Value(0))
   const buttonInterpolation =  colorState.current.interpolate({
@@ -36,13 +38,24 @@ const PinLock = () => {
 
   const handleAuth = () => {
     userPin.current === pin && setPinkLock(false)
+    userPin.current !== pin && setError(true)
   }
 
   useEffect(() => {
     const getConfig = async () => {
+      const type = await AsyncStorage.getItem('SECURETYPE')
       const usePin = await AsyncStorage.getItem('USEPIN')
       const pin = await AsyncStorage.getItem('PIN')
-      console.log(pin)
+      
+      if (type === 'FINGER') {
+        TouchID.authenticate('Use your fingerprint to gain access')
+          .then((_: any) => {}).catch((error: any) => { 
+          if (error.code === 'AUTHENTICATION_CANCELED') {
+            BackHandler.exitApp()
+          }
+        })
+        return
+      }
       if (!usePin || usePin === 'YES') {
         userPin.current = pin || ''
         setTimeout(() => setPinkLock(true), 100)
@@ -67,67 +80,69 @@ const PinLock = () => {
   }, [enabled])
 
   return (
-    <TVMazeModal visible={pinLock} onBackdropTouchEnd={() => {}} modalViewStyle={{padding: 20}} >
-      {!userPin.current ? (
-        <>
-          <Text style={styles.text}>Please introduce a PIN to secure the application and prevent unauthorized users.</Text>
-          <Separator height={5} />
-          <Text style={styles.text}>If you dismiss you will be no longer able to set a PIN.</Text>
+    <>
+      <TVMazeModal visible={pinLock} onBackdropTouchEnd={() => {}} modalViewStyle={{padding: 20}} >
+        {!userPin.current ? (
+          <>
+            <Text style={styles.text}>Enter a PIN to protect the app from unauthorized users.</Text>
+            <Separator height={5} />
+            <Text style={styles.text}>If you dismiss you will be no longer able to set a PIN.</Text>
+            <Separator height={15} />
+            <TextInput
+              placeholder={'Enter your pin'}
+              value={pin}
+              style={styles.input}
+              onChangeText={(text: string) => setPin(text)}
+            />
+            <Separator height={10} />
+            <TextInput
+              placeholder={'Confirm your pin'}
+              value={confirmationPin}
+              style={styles.input}
+              onChangeText={(text: string) => setConfirmationPin(text)}
+            />
+            <Separator height={5} />
+            <Text style={styles.detail}>* More than 4 digits, PINS must match</Text>
+            <Separator height={15} />
+            <View style={styles.buttonsContainer}>
+              <TouchableOpacity onPress={handleCancel}>
+                <View style={[styles.button, styles.noThanksButton]}>
+                  <Text style={styles.noThanks}>NO, THANKS</Text>
+                </View>
+              </TouchableOpacity>
+              <Separator width={10} />
+              <TouchableOpacity disabled={!enabled} onPress={handleConfirm}>
+                <Animated.View style={animatedStyle}>
+                  <Text style={styles.confirmPin}>CONFIRM PIN</Text>
+                </Animated.View>
+              </TouchableOpacity>
+            </View>
+          </>
+        ) : (
+          <>
+          <Text style={styles.text}>Please introduce your PIN.</Text>
           <Separator height={15} />
           <TextInput
             placeholder={'Enter your pin'}
             value={pin}
             style={styles.input}
+            secureTextEntry
             onChangeText={(text: string) => setPin(text)}
           />
-          <Separator height={10} />
-          <TextInput
-            placeholder={'Confirm your pin'}
-            value={confirmationPin}
-            style={styles.input}
-            onChangeText={(text: string) => setConfirmationPin(text)}
-          />
           <Separator height={5} />
-          <Text style={styles.detail}>* More than 4 digits, PINS must match</Text>
+            {error && <Text style={styles.error}>* Incorrect PIN</Text>}
           <Separator height={15} />
           <View style={styles.buttonsContainer}>
-            <TouchableOpacity onPress={handleCancel}>
-              <View style={[styles.button, styles.noThanksButton]}>
-                <Text style={styles.noThanks}>NO, THANKS</Text>
-              </View>
-            </TouchableOpacity>
-            <Separator width={10} />
-            <TouchableOpacity disabled={!enabled} onPress={handleConfirm}>
+            <TouchableOpacity disabled={!enabled} onPress={handleAuth}>
               <Animated.View style={animatedStyle}>
                 <Text style={styles.confirmPin}>CONFIRM PIN</Text>
               </Animated.View>
             </TouchableOpacity>
           </View>
         </>
-      ) : (
-        <>
-        <Text style={styles.text}>Please introduce your PIN.</Text>
-        <Separator height={15} />
-        <TextInput
-          placeholder={'Enter your pin'}
-          value={pin}
-          style={styles.input}
-          secureTextEntry
-          onChangeText={(text: string) => setPin(text)}
-        />
-        <Separator height={5} />
-          <Text style={styles.detail}>* Incorrect PIN</Text>
-        <Separator height={15} />
-        <View style={styles.buttonsContainer}>
-          <TouchableOpacity disabled={!enabled} onPress={handleAuth}>
-            <Animated.View style={animatedStyle}>
-              <Text style={styles.confirmPin}>CONFIRM PIN</Text>
-            </Animated.View>
-          </TouchableOpacity>
-        </View>
-      </>
-      )}
-    </TVMazeModal>
+        )}
+      </TVMazeModal>
+    </>
   )
 }
 
@@ -168,6 +183,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: TEXT_COLOR,
     textAlign: 'justify',
+  },
+  error: {
+    fontFamily: 'arial',
+    fontSize: 10,
+    color: 'red',
+    textAlign: 'left',
+    alignSelf: 'flex-start'
   },
   detail: {
     fontFamily: 'arial',

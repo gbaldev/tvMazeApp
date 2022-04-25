@@ -118,7 +118,6 @@ const fetchPersonsByNameReducer = {
 }
 
 const getShowIdFromCastLink = (link: string) => {
-  console.log(link)
   const splitted = link.split('/')
   return splitted.length ? Number(splitted[splitted.length - 1]) : 0
 }

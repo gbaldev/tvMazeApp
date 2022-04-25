@@ -28,7 +28,6 @@ const SerieDetailScreen = ({ route }: any) => {
   }
 
   useEffect(() => {
-    console.log(serie)
     if (serieId && serie && !Object.entries(serie?.seasons || []).length) {
       GeneralTvMazeActions.fetchEpisodes({ serieId: serie.id })
     }
