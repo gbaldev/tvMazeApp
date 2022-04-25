@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import React, { useEffect, useState } from 'react'
 import { Image, StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native'
-import { CALLBACK_TYPE } from 'react-native-gesture-handler/lib/typescript/handlers/gestures/gesture'
 import { Serie } from '../../../models'
 import { useGeneralTvMazeActions } from '../../../redux/generalTvMaze'
 import { seriesProvider, useAppSelector } from '../../../redux/hooks'

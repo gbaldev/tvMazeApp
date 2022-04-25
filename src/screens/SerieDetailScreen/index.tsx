@@ -3,7 +3,7 @@ import { ActivityIndicator, Image, ImageBackground, StyleSheet, Text, TouchableO
 import { ScrollView } from 'react-native-gesture-handler'
 import { useGeneralTvMazeActions } from '../../redux/generalTvMaze'
 import { seriesProvider, useAppSelector } from '../../redux/hooks'
-import { NoResults, Screen, Separator } from '../../utils/components'
+import { Screen, Separator } from '../../utils/components'
 import { bold, listElements, loadingImage, removeHtmlTags } from '../../utils/utils'
 import { DetailCard } from './components'
 import SeasonsDetails from './components/SeasonsDetails'
@@ -22,7 +22,7 @@ const SerieDetailScreen = ({ route }: any) => {
   const FavoriteIcon = () => {
     return serieId ? (
       <TouchableOpacity onPress={handleFavorite}>
-        <Image source={serie.isFavorite ? favoriteSelected : favoriteUnselected} style={{height: 25, width: 25}} />
+        <Image source={serie.isFavorite ? favoriteSelected : favoriteUnselected} style={styles.favIcon} />
       </TouchableOpacity>
     ) : null
   }
@@ -109,5 +109,9 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
   },
+  favIcon: {
+    height: 25,
+    width: 25,
+  }
 })
 export default SerieDetailScreen
