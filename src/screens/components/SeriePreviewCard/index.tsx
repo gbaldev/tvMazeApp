@@ -28,8 +28,8 @@ const SeriePreviewCard = ({ show, id, callback }: SeriePreviewCardProps) => {
   const GeneralTvMazeActions = useGeneralTvMazeActions()
 
   const favoriteStyle = {
-    borderWidth: (_show || show)?.isFavorite ? 5 : 0,
-    borderColor: (_show || show)?.isFavorite ? '#FFB806' : 'transparent'
+    borderWidth: _show?.isFavorite ? 5 : 0,
+    borderColor: _show?.isFavorite ? '#FFB806' : 'transparent'
   }
   useEffect(() => {
     const fetchSerie = async () => {
