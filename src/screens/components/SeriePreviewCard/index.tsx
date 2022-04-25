@@ -17,7 +17,8 @@ interface SeriePreviewCardProps {
 const SeriePreviewCard = ({ show, id, callback }: SeriePreviewCardProps) => {
   const series = useAppSelector(state => state.generalTvMaze.series)
   const navigation = useNavigation()
-  const [_show, setShow] = useState<Serie | undefined>(show)
+  const [showFromId, setShow] = useState<Serie | undefined>()
+  const _show = (showFromId || show)
   const [loading, setLoading] = useState<boolean>(false)
   let storedShow = id ? seriesProvider.getSerieById(id) : null
   const handleOnPress = () => {
@@ -27,8 +28,8 @@ const SeriePreviewCard = ({ show, id, callback }: SeriePreviewCardProps) => {
   const GeneralTvMazeActions = useGeneralTvMazeActions()
 
   const favoriteStyle = {
-    borderWidth: _show?.isFavorite ? 5 : 0,
-    borderColor: _show?.isFavorite ? '#FFB806' : 'transparent'
+    borderWidth: (_show || show)?.isFavorite ? 5 : 0,
+    borderColor: (_show || show)?.isFavorite ? '#FFB806' : 'transparent'
   }
   useEffect(() => {
     const fetchSerie = async () => {
