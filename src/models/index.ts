@@ -1,0 +1,20 @@
+import HttpRequest from './HttpRequests'
+import Externals from './Externals'
+import Image from './Image'
+import Links from './Links'
+import Network from './Network'
+import Rating from './Rating'
+import Schedule from './Schedule'
+import Serie from './Serie'
+import Episode from './Episode'
+import WebChannel from './WebChannel'
+import Season from './Season'
+import People, { PeopleWithCast } from './People'
+import Country from './Country'
+import { SearchedSerie, SearchByShowResponse } from './SearchedSerie'
+import { CHANNEL } from './Channel'
+import { CRITERIA } from './Criteria'
+import Cast from './Cast'
+
+export type { HttpRequest, Episode, Country, People, Season, Externals, Image, Links, Network, Rating, Schedule, Serie, WebChannel, SearchedSerie, SearchByShowResponse, Cast, PeopleWithCast }
+export { CHANNEL, CRITERIA }
