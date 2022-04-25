@@ -17,7 +17,7 @@ const SerieDetail = ({ serie }: SerieDetailProps) => {
   return (
     <View style={styles.containerStyle}>
       <TouchableOpacity style={styles.totalWidth} onPress={handleOnPress}>
-        <Image source={{uri: serie.image.original}} defaultSource={loadingImage}  style={styles.image} />
+        <Image source={{uri: serie?.image?.original }} defaultSource={loadingImage}  style={styles.image} />
       </TouchableOpacity>
       <View style={{paddingHorizontal: 5, paddingBottom: 10}}>
         <Text style={styles.name}>{serie?.name}</Text>

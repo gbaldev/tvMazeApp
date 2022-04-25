@@ -1,7 +1,8 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { Serie } from '../../../../models'
+import { FlatList } from 'react-native-gesture-handler'
+import { Episode, Serie } from '../../../../models'
 import { useGeneralTvMazeActions } from '../../../../redux/generalTvMaze'
 import { NoResults, Separator } from '../../../../utils/components'
 import { TEXT_COLOR } from '../../../../utils/constants'
@@ -15,49 +16,47 @@ const SeasonsDetails = ({ show }: SeasonsDetailsProps) => {
   const seasons = Object.values(show?.seasons || {})
   const GeneralTvMazeActions = useGeneralTvMazeActions()
   const navigation = useNavigation()
-  const SeasonsView = () => {
-    return seasons.length ? (
-      <>
-        {seasons.map((season, i) => {
-          let seasonNumber = i + 1
-          return (
-            <View style={styles.seasonsListContainer} key={`season-${seasonNumber}-${show?.id}`}>
-                <Text style={styles.seasonTitle}>Season {seasonNumber}</Text>
-                <Separator height={15} />
-                {season.map((episode, i) => {
-                  const episodeNumber = i + 1
-                  const episodLabel = episode.type === 'regular' ? `Episode ${episodeNumber}` : 'Special'
-                  return (
-                    <TouchableOpacity key={`season-inner-${seasonNumber}-${show?.id}-${episodeNumber}`} style={styles.episodeContainer} onPress={() => {
-                      GeneralTvMazeActions.setEpisodeToReview({ episode })
-                      navigation.push('serieDetail' as never)
-                    }}>
-                      <View>
-                        <Image source={{uri: episode?.image?.original || ''}} defaultSource={loadingImage} style={styles.episodeImage}/>
-                      </View>
-                      <View style={styles.rightContainer}>
-                        <Text numberOfLines={1} style={styles.episodeText}>{episodLabel}: {episode?.name}</Text>
-                        <Separator height={10} />
-                        <Text numberOfLines={4} style={styles.summaryText}>{removeHtmlTags(episode.summary || '')}</Text>
-                      </View>
-                    </TouchableOpacity>
-                  )
-                })}
-            </View>
-          )
-        })}
-      </>
-    ) : <></> 
+  
+  interface renderItemProps {
+    item: Episode[]
+    index: number
   }
 
-
-
-    return show.episodesError ? (
-      <NoResults text='An error ocurred, try again' reloadResult callback={() => GeneralTvMazeActions.fetchEpisodes({ serieId: show.id })}/>
-    ) : (
-      <View>
-          <SeasonsView />
+  const renderItem = ({item: season, index: seasonNumber}: renderItemProps) => {
+    return (
+      <View style={styles.seasonsListContainer}>
+          <Text style={styles.seasonTitle}>Season {seasonNumber + 1}</Text>
+          <Separator height={15} />
+          {season.map((episode, i) => {
+            const episodeNumber = i + 1
+            const episodLabel = episode.type === 'regular' ? `Episode ${episodeNumber}` : 'Special'
+          
+            return (
+              <TouchableOpacity key={`season-inner-${seasonNumber}-${show?.id}-${episodeNumber}`} style={styles.episodeContainer} onPress={() => {
+                GeneralTvMazeActions.setEpisodeToReview({ episode })
+                navigation.push('serieDetail' as never)
+              }}>
+                <View>
+                  <Image source={{ uri: episode?.image?.original }} defaultSource={loadingImage} style={styles.episodeImage}/>
+                </View>
+                <View style={styles.rightContainer}>
+                  <Text numberOfLines={1} style={styles.episodeText}>{episodLabel}: {episode?.name}</Text>
+                  <Separator height={10} />
+                  <Text numberOfLines={4} style={styles.summaryText}>{removeHtmlTags(episode.summary || '')}</Text>
+                </View>
+              </TouchableOpacity>
+            )
+          })}
       </View>
+    )
+  }
+  
+  return show.episodesError ? (
+    <NoResults text='An error ocurred, try again' reloadResult callback={() => GeneralTvMazeActions.fetchEpisodes({ serieId: show.id })}/>
+  ) : (
+    <View>
+        <FlatList data={seasons} renderItem={renderItem} scrollEnabled={false} nestedScrollEnabled={true} />
+    </View>
     )
 }
 

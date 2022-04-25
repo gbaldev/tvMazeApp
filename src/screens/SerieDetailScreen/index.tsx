@@ -22,7 +22,7 @@ const SerieDetailScreen = ({ route }: any) => {
   const FavoriteIcon = () => {
     return serieId ? (
       <TouchableOpacity onPress={handleFavorite}>
-        <Image source={serie.isFavorite ? favoriteSelected : favoriteUnselected} style={styles.favIcon} />
+        <Image source={serie?.isFavorite ? favoriteSelected : favoriteUnselected} style={styles.favIcon} />
       </TouchableOpacity>
     ) : null
   }
