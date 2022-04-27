@@ -20,3 +20,6 @@ There is already a build at /dist, you can also buiild the app yourself:
 - run `cd android && ./gradlew assembleDebug`
 
 the you can find the generated APK in `android/app/build/outputs/apk/debug/app-debug.apk`
+
+
+## NOTES: Proposal for [improving performance at displaying seasons](https://github.com/gbaldev/tvMazeApp/pull/2)
