@@ -1,12 +1,13 @@
 import { useNavigation } from '@react-navigation/native'
-import React from 'react'
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Image, StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import { Episode, Serie } from 'models/index'
 import { useGeneralTvMazeActions } from 'redux/generalTvMaze'
 import { NoResults, Separator } from 'utils/components'
 import { TEXT_COLOR } from 'utils/constants'
 import { loadingImage, removeHtmlTags } from 'utils/utils'
+import { useAppSelector } from 'redux/hooks'
 
 interface SeasonsDetailsProps {
     show: Serie
@@ -16,23 +17,20 @@ const SeasonsDetails = ({ show }: SeasonsDetailsProps) => {
   const seasons = Object.values(show?.seasons || {})
   const GeneralTvMazeActions = useGeneralTvMazeActions()
   const navigation = useNavigation()
-  
-  interface renderItemProps {
-    item: Episode[]
-    index: number
-  }
+  const [selectedSeason, setSelectedSeason] = useState<{ number: number, season: Episode[] } | null>(null)
+  const titleStyle = (seasonNumber: number) => (styles[seasonNumber === selectedSeason?.number ? 'selectedSeason' : 'notSelectedSeason'])
 
-  const renderItem = ({item: season, index: seasonNumber}: renderItemProps) => {
+  useEffect(() => seasons[0] &&setSelectedSeason({number: 1, season: seasons[0]}), [show.loadingEpisodes])
+
+  const RenderSeason = () => {
     return (
       <View style={styles.seasonsListContainer}>
-          <Text style={styles.seasonTitle}>Season {seasonNumber + 1}</Text>
-          <Separator height={15} />
-          {season.map((episode, i) => {
+          {selectedSeason?.season.map((episode, i) => {
             const episodeNumber = i + 1
             const episodLabel = episode.type === 'regular' ? `Episode ${episodeNumber}` : 'Special'
           
             return (
-              <TouchableOpacity key={`season-inner-${seasonNumber}-${show?.id}-${episodeNumber}`} style={styles.episodeContainer} onPress={() => {
+              <TouchableOpacity style={styles.episodeContainer} onPress={() => {
                 GeneralTvMazeActions.setEpisodeToReview({ episode })
                 navigation.push('serieDetail' as never)
               }}>
@@ -55,19 +53,28 @@ const SeasonsDetails = ({ show }: SeasonsDetailsProps) => {
     <NoResults text='An error ocurred, try again' reloadResult callback={() => GeneralTvMazeActions.fetchEpisodes({ serieId: show.id })}/>
   ) : (
     <View>
-        <FlatList data={seasons} renderItem={renderItem} scrollEnabled={false} nestedScrollEnabled={true} />
+        {selectedSeason && !show.loadingEpisodes && (
+          <>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.seriesTitle} contentContainerStyle={styles.seriesTitleContainer}>
+            {
+              seasons.map((s, i) => {
+                return (
+                  <Text style={[styles.season, titleStyle(i+1)]} onPress={() => setSelectedSeason({season: s, number: i+1})}>Season {i + 1}</Text>
+                )
+              })
+            }
+          </ScrollView>
+            <RenderSeason />
+          </>
+        )}
     </View>
     )
 }
 
 const styles = StyleSheet.create({
   seasonsListContainer: {
+    marginTop: 5,
     width: '100%',
-    borderWidth: 0.5,
-    borderColor: '#3f3f3f',
-    borderRadius: 10,
-    marginBottom: 10,
-    overflow: 'hidden',
   },
   seasonTitle: {
     fontFamily: 'arial',
@@ -106,6 +113,31 @@ const styles = StyleSheet.create({
     width: 100,
     resizeMode: 'cover',
   },
+  season: {
+    fontFamily: 'arial',
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: TEXT_COLOR,
+    paddingRight: 15,
+  },
+  seriesTitleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  seriesTitle: {
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: 'grey',
+    marginBottom: 10,
+    height: 40,
+  },
+  selectedSeason: {
+    fontWeight: 'bold',
+  },
+  notSelectedSeason: {
+    fontWeight: '200',
+  }
 })
 
 
