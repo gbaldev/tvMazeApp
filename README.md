@@ -1,5 +1,7 @@
 # tvMazeApp
 
+A 2 days code challenge for creating an app
+
 ## Installation
 
 - cd into root
